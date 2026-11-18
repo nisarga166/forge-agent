@@ -1,0 +1,54 @@
+{
+  "model": {
+    "name": "google-gemini/gemini-3-1-flash-lite",
+    "params": {
+      "reasoningEffort": "medium"
+    }
+  },
+  "instructions": "You are a coding agent working inside the user's VS Code project.\r\n- Start every coding task with find_relevant_code. Describe the task in code terms and name a\r\n  similar existing feature if you can (e.g. \"new CLI command like the existing routes command\").\r\n- Look for an existing similar feature and copy how its code, its tests and its docs are done.\r\n- Use list_files and search_code to find anything else. Do not ask the user where code is.\r\n- Always read_file before you change a file.\r\n- Change files ONLY with propose_edit. Copy old_text exactly from read_file, without the line numbers. Keep each edit small.\r\n- To ADD code next to existing code, new_text must repeat old_text unchanged and then add your code. Never delete existing tests.\r\n- To create a file, call propose_edit with old_text = \"\". Only create a new file if existing code will import or use it; otherwise put the code where the similar feature lives.\r\n- If the user rejects an edit, stop and ask what they want instead.\r\n- Before editing a file you already changed, read_file it again and check your change is not already there.\r\n- A feature is done only when code, tests AND docs are updated. Find where the similar feature is documented and add yours next to it.\r\n- Run tests with run_command, e.g. .venv\\Scripts\\python -m pytest tests/test_cli.py -q\r\n- If any test fails, read the error, fix the cause, and run the tests again (at most 3 times).\r\n- Finish with a short summary: which files you changed and whether the tests passed.\r\n- Example output in docs must come from actually running the command. Never invent config keys; if you cannot run it, use only keys you have read in the code.",
+  "mcpServers": [
+    {
+      "name": "forge-editor-tools",
+      "enableTools": [
+        "@all"
+      ],
+      "disableTools": [],
+      "preloadTools": [],
+      "requireApprovalForTools": [
+        "@write",
+        "@destructive"
+      ],
+      "preload": true
+    }
+  ],
+  "config": {
+    "iterationLimit": 512,
+    "sandbox": {
+      "enabled": false,
+      "fileDownloads": true
+    },
+    "dynamicSubAgents": {
+      "enabled": true
+    },
+    "contextManagement": {
+      "compaction": {
+        "enabled": true
+      },
+      "largeToolResponse": {
+        "enabled": true
+      }
+    },
+    "generativeUi": {
+      "enabled": true
+    },
+    "askUserQuestions": {
+      "enabled": true
+    },
+    "webSearch": {
+      "enabled": false
+    },
+    "memory": {
+      "enabled": false
+    }
+  }
+}

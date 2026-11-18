@@ -1,0 +1,13 @@
+# Installed packages and build output (anyone can rebuild them with npm install / npm run compile)
+node_modules/
+out/
+*.vsix
+
+# Secrets: never commit these
+.env
+.env.*
+*.key
+
+# Editor and OS clutter
+.DS_Store
+Thumbs.db

@@ -1,0 +1,88 @@
+{
+  "name": "forge-agent",
+  "displayName": "Forge Agent",
+  "description": "Coding agent for VS Code whose agent loop runs on TrueForge",
+  "version": "0.0.6",
+  "publisher": "nisarga",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "forge.openPanel",
+        "title": "Forge: Open Agent Panel"
+      },
+      {
+        "command": "forge.inlineEdit",
+        "title": "Forge: Edit Selection"
+      }
+    ],
+    "configuration": {
+      "title": "Forge Agent",
+      "properties": {
+        "forge.trueforgeUrl": {
+          "type": "string",
+          "default": "http://localhost:8790",
+          "description": "Where TrueForge is running."
+        },
+        "forge.agentName": {
+          "type": "string",
+          "default": "forge-coder",
+          "description": "Name of the saved TrueForge agent to use."
+        },
+        "forge.mcpPort": {
+          "type": "number",
+          "default": 3917,
+          "description": "Port of the built-in tool server that TrueForge connects to (http://localhost:PORT/mcp). Reload the window after changing."
+        },
+        "forge.backupModel": {
+          "type": "string",
+          "default": "",
+          "description": "Task C: model to switch to when the main model fails, written as 'provider name/model name' exactly as in TrueForge (e.g. groq/qwen-27b). Empty = no backup."
+        },
+        "forge.stallSeconds": {
+          "type": "number",
+          "default": 120,
+          "description": "Task C: if the model sends nothing for this many seconds (while no tool is running), treat it as broken."
+        },
+        "forge.maxSteps": {
+          "type": "number",
+          "default": 60,
+          "description": "Task C: maximum agent-loop steps per message, so a looping agent stops."
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "forge.inlineEdit",
+        "key": "ctrl+alt+k",
+        "when": "editorTextFocus && editorHasSelection"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --target=node20 --sourcemap",
+    "watch": "npm run compile -- --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@truefoundry/trueforge-sdk": "0.185.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.90.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.6.0"
+  }
+}

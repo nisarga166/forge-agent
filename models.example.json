@@ -1,0 +1,23 @@
+{
+  "_readme": "EXAMPLE ONLY. These are fake keys. Real keys are typed into TrueForge (Settings -> Models), never into this repo.",
+  "trueforge_models": {
+    "primary": {
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-lite",
+      "api_key": "YOUR_GEMINI_API_KEY"
+    },
+    "backup": {
+      "provider": "groq",
+      "model": "qwen-27b",
+      "upstream_model": "qwen/qwen3.8-27b",
+      "api_key": "YOUR_GROQ_API_KEY"
+    }
+  },
+  "vscode_settings": {
+    "forge.trueforgeUrl": "http://localhost:8790",
+    "forge.agentName": "forge-coder",
+    "forge.backupModel": "groq/qwen-27b",
+    "forge.stallSeconds": 120,
+    "forge.maxSteps": 60
+  }
+}
