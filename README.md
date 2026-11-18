@@ -3,7 +3,7 @@
 Built for the Techfest IIT Bombay x TrueFoundry **Forge-a-thon**, Round 1.
 
 - **Demo video:** https://youtu.be/y4duBBP3RRA
-- **Write-up (PDF):** docs/writeup.pdf
+- **Write-up (PDF):** [docs/writeup.pdf](docs/writeup.pdf)
 - **Starting point:** built **from scratch** (VS Code extension template). We first tried to fork Continue, but it would not build on Windows with the Node version TrueForge needs, so we switched on day 2. See [docs/ENGINEERING_LOG.md](docs/ENGINEERING_LOG.md), row 5.
 
 ## What it does
